@@ -13,7 +13,7 @@ VIDEO_SOURCES = {
 }
 
 selected_source = None
-overlay_image_path = "logo.png"
+overlay_image_path = "Lenna.jpg"
 
 def resolve_youtube_stream(youtube_url):
     ydl_opts = {
