@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Visual Forgery Trainer</title>
+  <style>
+    body {
+      background: #0d0d0d;
+      color: #00ffe7;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 40px;
+      margin: 0;
+    }
+    h1 {
+      text-align: center;
+      text-shadow: 0 0 15px #00ffe7;
+      font-size: 2.2em;
+    }
+    form {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    label {
+      margin: 0 20px;
+      font-size: 1.2em;
+      cursor: pointer;
+      padding: 10px 15px;
+      background-color: rgba(0, 255, 231, 0.1);
+      border-radius: 12px;
+      transition: background 0.3s;
+    }
+    label:hover {
+      background-color: rgba(0, 255, 231, 0.2);
+    }
+    .btn {
+      background-color: #00ffe7;
+      border: none;
+      color: #000;
+      padding: 12px 30px;
+      margin-top: 25px;
+      font-size: 1.1em;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 20px #00ffe7, inset 0 0 10px #00ffe7;
+      transition: all 0.3s ease;
+    }
+    .video-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .video-box {
+      width: 45%;
+      background: #111;
+      border: 2px solid #00ffe7;
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 0 25px rgba(0, 255, 231, 0.15);
+    }
+    .video-box h2 {
+      text-align: center;
+      color: #00ffff;
+      text-shadow: 0 0 8px #00ffff;
+      font-size: 1.4em;
+      margin-bottom: 10px;
+    }
+    .video-frame {
+      width: 100%;
+      height: 320px;
+      border-radius: 15px;
+      border: none;
+    }
+    @media (max-width: 900px) {
+      .video-box {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🧩 Visual Forgery Trainer</h1>
+  <form method="POST">
+    {% for name, url in sources.items() %}
+      <label>
+        <input type="radio" name="stream_source" value="{{ name }}" {% if selected == name %}checked{% endif %}>
+        {{ name }}
+      </label>
+    {% endfor %}
+    <br>
+    <button class="btn" type="submit">Hack</button>
+  </form>
+
+  {% if selected %}
+  <div class="video-container">
+    <div class="video-box">
+      <h2>Original Stream</h2>
+      <img class="video-frame" src="/video_feed?mode=original" />
+    </div>
+    <div class="video-box">
+      <h2>Overwritten Stream</h2>
+      <img class="video-frame" src="/video_feed?mode=overlay" />
+    </div>
+  </div>
+  {% endif %}
+</body>
+</html>
